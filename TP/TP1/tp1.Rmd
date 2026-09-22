@@ -91,19 +91,66 @@ boxplot(titanic_place$Prix)
 ```
 
 
-### 
+### 8. passagers dans chaque classe
+
+```{r}
+table(titanic_place$Classe)
+```
+
+
+### 9.pourcentages de passagers
+
+```{r}
+prop.table(table(titanic_place$Classe))
+```
+
+### 10.a)
+
+```{r}
+aggregate(titanic_place$Survie ~ titanic_place$Classe, FUN=sum)
+```
+
+```{r}
+colnames()
+```
+
+
+### 10)b)
+
+```{r}
+tapply(titanic_place$Survie, titanic_place$Classe, FUN=sum)
+```
+
+### 11)
+
+```{r}
+titanic_client1 <- read.csv("titanic_client1.csv")
+titanic_client2 <- read.csv("titanic_client2.csv")
+titanic_client3 <- read.csv("titanic_client3.csv")
+
+```
+
+
+```{r}
+str(titanic_client1)
+str(titanic_client2)
+str(titanic_client3)
+
+```
+
+### 12)
+
+```{r}
+titanic_client <- rbind.data.frame(titanic_client1, titanic_client2, titanic_client3)
+```
+
+```{r}
+rm(titanic_client1, titanic_client2, titanic_client3)
+```
 
 
 
-
-
-
-
-
-
-
-
-
+### 14)
 
 
 
