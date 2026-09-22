@@ -1,0 +1,111 @@
+---
+title: "tp1_stats_des"
+output: html_document
+date: "2026-09-22"
+---
+
+# TP1 Statistiques descriptives - rappels de R base
+
+
+## Exercice 1 (Rappels des sessions précédentes : on fait du R base !)
+
+### 1.importer les packages
+
+```{r}
+library(readxl)
+
+```
+
+
+### 2.importation de la table
+
+```{r}
+titanic_place <- read_excel("TP/TP1/titanic_place.xlsx")
+```
+
+
+### 3.résumé de la table
+
+```{r}
+str(titanic_place)
+```
+
+
+### conversion
+
+```{r}
+titanic_place$Classe <- as.character(titanic_place$Classe)
+titanic_place$Prix <- as.numeric(titanic_place$Prix)
+```
+
+
+```{r}
+str(titanic_place)
+```
+
+
+
+### 4.doublons
+
+```{r}
+sum(duplicated(titanic_place)==T)
+```
+
+aucun doublon
+
+### 5. passager ayant payé son billet le plus cher
+
+```{r}
+which(titanic_place$Prix == max(titanic_place$Prix))
+```
+
+```{r}
+titanic_place[which(titanic_place$Prix == max(titanic_place$Prix)),]
+```
+
+
+ou bien
+
+```{r}
+titanic_place[order(titanic_place$Prix, decreasing = T), ][1:4,]
+```
+
+
+### 6. les passagers ayant payé les billets les moins chers
+
+```{r}
+titanic_place[which(titanic_place$Prix == min(titanic_place$Prix)),]
+```
+
+
+
+### 7. résumé stats du prix
+
+```{r}
+summary(titanic_place$Prix)
+```
+
+
+```{r}
+boxplot(titanic_place$Prix)
+```
+
+
+### 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
