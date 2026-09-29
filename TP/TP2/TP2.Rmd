@@ -1,0 +1,35 @@
+---
+title: "TP2"
+output: html_document
+---
+
+# TP2: Statistiques descriptives - package dplyr
+
+## Exercice 1
+
+### 0) importer les packages
+
+```{r}
+library(readr)
+library(dplyr)
+```
+
+il y a deux types de pipes le natif %>%  et le nouveau |>, le natif est propre à dplyr et le nouveau est pour un usgae plus général de R 
+
+### 1) importer les données
+
+```{r}
+titanic1 <- read_csv("titanic_client1.csv")
+titanic2 <- read_csv("titanic_client2.csv")
+titanic3 <- read_csv("titanic_client3.csv")
+
+titanic1 %>% 
+
+```
+
+
+
+
+
+
+
