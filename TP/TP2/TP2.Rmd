@@ -14,7 +14,7 @@ library(readr)
 library(dplyr)
 ```
 
-il y a deux types de pipes le natif %>%  et le nouveau |>, le natif est propre à dplyr et le nouveau est pour un usgae plus général de R 
+il y a deux types de pipes le natif %>%  et le nouveau |>, le natif est propre à dplyr et le nouveau est pour un usgae plus général de R.
 
 ### 1) importer les données
 
@@ -23,7 +23,7 @@ titanic1 <- read_csv("titanic_client1.csv")
 titanic2 <- read_csv("titanic_client2.csv")
 titanic3 <- read_csv("titanic_client3.csv")
 
-titanic1 %>% 
+
 
 ```
 

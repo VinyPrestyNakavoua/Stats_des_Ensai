@@ -1,0 +1,139 @@
+---
+title: "TP3"
+output: html_document
+date: "2026-10-02"
+---
+
+
+
+```{r}
+library(dplyr)
+library(labelled)
+```
+
+# Exercice 1
+
+##  1) Importez et affichez les dix premières lignes de la table equipement 
+
+```{r}
+equipement <- readRDS("equipement.rds") %>%  
+  labelled :: remove_attributes(attributes = "format.sas")
+```
+
+
+```{r}
+str(equipement)
+summary(equipement)
+```
+
+
+```{r}
+head(equipement, 10)
+```
+
+## 2) 
+Non toutes les comInsee ne sont pas des CHR de tailles 5! ex : "2001" au lieu de "02001"
+
+```{r}
+equipement %>% 
+  mutate(nb_chr=nchar(ComInsee)) %>% 
+  group_by(nb_chr) %>% 
+  summarise(nb=n())
+```
+
+on va modifier les lignes qui ont que 4 charactères
+
+```{r}
+equipement <- equipement %>% 
+  mutate(ComInsee = if_else(nchar(ComInsee)==4, paste0("0", as.character(ComInsee)), as.character(ComInsee)))
+```
+
+
+```{r}
+head(equipement)
+```
+
+
+## 3) Question 3 : rajoutez la variable libelle à la table equipement.
+
+
+```{r}
+libelle <- readRDS("libelle.rds") %>%  
+  labelled :: remove_attributes(attributes = "format.sas")
+```
+
+
+
+```{r}
+head(libelle)
+```
+
+
+```{r}
+equipement <- equipement %>% 
+  left_join(libelle, by=c("Type" = "Numero")) %>% 
+  relocate(Libelle, .after=Type)
+```
+
+
+```{r}
+head(equipement)
+```
+
+
+## Question 4 : Calculez le nombre total d’équipements par commune et stockez les résultats dans une table nb_eq_com.
+
+```{r}
+nb_eq_com <- equipement %>% 
+  group_by(ComInsee) %>% 
+  summarise(nb_equip_tot = sum(Effectif))
+
+nb_eq_com
+```
+
+## Question 5 : Calculez le nombre d’équipements par département. On stockera les résultats dans la table nb_eq_dep .
+
+
+
+```{r}
+nb_eq_dep <- nb_eq_com %>% 
+  mutate(dep=substr(ComInsee, 1, 2), .before = 1) %>% 
+  group_by(dep) %>% 
+  summarise(nb_equip_tot = sum(nb_equip_tot))
+
+nb_eq_dep
+```
+
+```{r}
+nb_eq_dep[nb_eq_dep$nb_equip_tot == max(nb_eq_dep$nb_equip_tot),]
+```
+
+
+```{r}
+nb_eq_dep[nb_eq_dep$nb_equip_tot == min(nb_eq_dep$nb_equip_tot),]
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
